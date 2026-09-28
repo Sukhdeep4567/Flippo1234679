@@ -1,26 +1,320 @@
 @import "tailwindcss";
 
+/* ------------------------------------------------------------------ */
+/* FLIPO design tokens                                                  */
+/* ------------------------------------------------------------------ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #fafaf8;
+  --surface: #f3f1ee;
+  --ink: #111111;
+  --muted: #6b6b6b;
+  --line: #e7e4df;
+  --accent: #5b3fe0;
+  --accent-2: #8e74ff;
+  --warm: #f2733a;
+  --teal: #39b59a;
+  --accent-gradient: linear-gradient(135deg, #5b3fe0 0%, #8e74ff 100%);
+  --brand-loop-gradient: linear-gradient(90deg, #f2733a, #7b4be0, #3b82f6, #39b59a);
+
+  --header-h: 72px;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-warm: var(--warm);
+  --color-teal: var(--teal);
+
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
+
+  --ease-out-expo: var(--ease-out-expo);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ------------------------------------------------------------------ */
+/* Base                                                                 */
+/* ------------------------------------------------------------------ */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+[id] {
+  scroll-margin-top: calc(var(--header-h) + 24px);
+}
+
+::selection {
+  background: color-mix(in oklab, var(--accent) 22%, transparent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Type scale                                                           */
+/* ------------------------------------------------------------------ */
+@utility text-h1 {
+  font-size: clamp(2.75rem, 1.6rem + 4.6vw, 5.5rem);
+  line-height: 1.03;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+@utility text-h2 {
+  font-size: clamp(2rem, 1.35rem + 2.6vw, 3.5rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+}
+
+@utility text-h3 {
+  font-size: clamp(1.375rem, 1.15rem + 0.8vw, 1.875rem);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  font-weight: 700;
+}
+
+@utility text-lead {
+  font-size: clamp(1.0625rem, 0.98rem + 0.4vw, 1.3125rem);
+  line-height: 1.55;
+}
+
+@utility eyebrow {
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+@utility section-y {
+  padding-block: clamp(72px, 4rem + 6vw, 152px);
+}
+
+/* Below-the-fold sections: the browser skips their layout/paint until they approach the
+   viewport. `auto` remembers the real size once rendered, so scrolling stays stable. */
+@utility cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* ------------------------------------------------------------------ */
+/* Motion helpers                                                       */
+/* ------------------------------------------------------------------ */
+
+/* Hero headline word reveal: pure CSS so it runs from first paint (LCP-safe). */
+@keyframes word-in {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(0.18em);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: none;
+  }
+}
+
+.word-reveal {
+  display: inline-block;
+  animation: word-in 0.9s var(--ease-out-expo) both;
+  animation-delay: calc(var(--i, 0) * 90ms + 80ms);
+}
+
+/*
+ * H1 words stay inline so the whole heading is one LCP candidate, and start faintly
+ * visible (not opacity 0) so the first paint already counts: blur-to-sharp + fade.
+ */
+@keyframes word-in-inline {
+  from {
+    opacity: 0.06;
+    filter: blur(12px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+.word-reveal-inline {
+  animation: word-in-inline 1s var(--ease-out-expo) both;
+  animation-delay: calc(var(--i, 0) * 90ms);
+}
+
+/* Scroll reveals (see components/ui/Reveal.tsx + RevealObserver.tsx) */
+[data-reveal],
+[data-reveal-group] > [data-reveal-item] {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+  transition:
+    opacity 0.6s var(--ease-out-expo),
+    transform 0.6s var(--ease-out-expo);
+}
+
+[data-reveal] {
+  transition-delay: var(--reveal-delay, 0s);
+}
+
+[data-reveal].is-in,
+[data-reveal-group].is-in > [data-reveal-item] {
+  opacity: 1;
+  transform: none;
+}
+
+[data-reveal-group] > [data-reveal-item]:nth-child(2) {
+  transition-delay: calc(var(--reveal-stagger) * 1);
+}
+[data-reveal-group] > [data-reveal-item]:nth-child(3) {
+  transition-delay: calc(var(--reveal-stagger) * 2);
+}
+[data-reveal-group] > [data-reveal-item]:nth-child(4) {
+  transition-delay: calc(var(--reveal-stagger) * 3);
+}
+[data-reveal-group] > [data-reveal-item]:nth-child(5) {
+  transition-delay: calc(var(--reveal-stagger) * 4);
+}
+[data-reveal-group] > [data-reveal-item]:nth-child(6) {
+  transition-delay: calc(var(--reveal-stagger) * 5);
+}
+[data-reveal-group] > [data-reveal-item]:nth-child(7) {
+  transition-delay: calc(var(--reveal-stagger) * 6);
+}
+[data-reveal-group] > [data-reveal-item]:nth-child(8) {
+  transition-delay: calc(var(--reveal-stagger) * 7);
+}
+[data-reveal-group] > [data-reveal-item]:nth-child(9) {
+  transition-delay: calc(var(--reveal-stagger) * 8);
+}
+[data-reveal-group] > [data-reveal-item]:nth-child(10) {
+  transition-delay: calc(var(--reveal-stagger) * 9);
+}
+[data-reveal-group] > [data-reveal-item]:nth-child(n + 11) {
+  transition-delay: calc(var(--reveal-stagger) * 10);
+}
+
+/* The highlighted item lands last with a subtle scale-up */
+[data-reveal-group] > [data-reveal-item="emphasis"]:nth-child(n) {
+  transform: translate3d(0, 18px, 0) scale(0.94);
+  transition-duration: 0.8s;
+  transition-delay: calc(var(--reveal-stagger) * 3 + 0.3s);
+}
+[data-reveal-group].is-in > [data-reveal-item="emphasis"]:nth-child(n) {
+  transform: none;
+}
+
+/* Gentle idle drift for hero cards */
+@keyframes float-a {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(var(--fx, 4px), var(--fy, -6px), 0);
+  }
+}
+
+.hero-float {
+  animation: float-a var(--fd, 7s) ease-in-out infinite;
+  animation-delay: var(--fdelay, 0s);
+}
+
+[data-paused="true"] .hero-float {
+  animation-play-state: paused;
+}
+
+/* Infinite logo marquee (CSS only) */
+@keyframes marquee {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.marquee-track {
+  will-change: transform;
+  animation: marquee var(--marquee-duration, 40s) linear infinite;
+}
+
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+.fade-mask-x {
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+/* Collapsible rows (FAQ, roles) — animates height: auto via grid rows */
+.collapse-grid {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.5s var(--ease-out-expo);
+}
+
+.collapse-grid[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+
+.collapse-grid > * {
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* ------------------------------------------------------------------ */
+/* Reduced motion                                                       */
+/* ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  [data-reveal],
+  [data-reveal-group] > [data-reveal-item],
+  [data-reveal-group] > [data-reveal-item="emphasis"]:nth-child(n) {
+    transform: none !important;
+  }
+
+  .word-reveal,
+  .word-reveal-inline,
+  .hero-float,
+  .marquee-track {
+    animation: none !important;
+  }
+
+  .collapse-grid {
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
 }

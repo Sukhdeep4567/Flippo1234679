@@ -1,0 +1,68 @@
+# FLIPO
+
+> FLIPO (flipoteam.com) is a Singapore-based brand licensing and co-branding market-intelligence company. It surveys audiences visually, profiles fans, and connects licensors, licensees and retailers. It acts as a "super-connector" in the licensing industry: customer-centric partnerships, driven by data, not intuition.
+
+## What FLIPO does
+
+- Market Intelligence: measures an audience's preferences across fandoms, products and any element within an intellectual property universe. No guesswork, just objective, winning insights.
+- The Super-Connector: transforms data into partnerships, functioning as the single access point to the global brand ecosystem and streamlining the industry into one seamless workflow.
+- Integration model: Tech (proprietary visual surveying technology) and Network (industry relationships) work as one connected loop.
+
+## Methodology
+
+- Capturing Emotions: surveys are purely visual, to capture instinctive preferences in the language consumers already understand.
+- Audience Profiling: audiences are hyper-profiled by exposing them to visual stimuli, enabling deep categorization based on levels of resonance.
+- Data Experts: statistical modeling turns a sample's response into a population's truth; a few thousand voices reveal what millions think.
+- Respondents come from research panels (a pool of over 300 million respondents), accessed through FLIPO's API.
+
+## What to expect
+
+- 130+ countries unlocked
+- Audiences from 3 years old and above
+- Results in under 2 weeks
+- 50% lower marketing cost
+- 2x more new customers
+- Boosted brand credibility
+
+## Who FLIPO helps
+
+- Licensors: understand your audience across markets.
+- Licensees: invest in the trends that drive behaviour.
+- Retailers: commercialize products and experiences that resonate.
+- Creative studios: validate new original content.
+- Investors: value intellectual properties.
+- Industry experts: convince with market signals.
+- Marketers: target consumers with confidence.
+- Sales teams: find the data points that drive conversion.
+
+## How it works
+
+1. Hop on an alignment call: no obligations, just a conversation about your journey, audience and ambitions.
+2. Separate the signal from the noise: FLIPO finds and surveys your ideal customers at scale.
+3. Wait for the partnership to come to you: FLIPO's network spans the co-branding ecosystem and bridges partnerships.
+
+Compared with a full-time hire ($10-15k/month), a generalist market-intelligence firm ($15-50k per study, months to deliver) or an agency (5k/month retainers), FLIPO works as an extension of your team at a fraction of the cost.
+
+## Team
+
+- Nico, Founder: close to a decade of corporate experience building and managing licensing programs, including the expansion of multi-million dollar franchises such as Transformers, My Little Pony and Power Rangers, and helping a startup grow annual revenue from $2M to over $30M through strategic partnering.
+- Riko, Head of Tech; Muhammad, Head of Data; Helena, Chief Editor; Beltran, Survey Designer.
+
+## FAQ
+
+- What services do you offer? Market intelligence and networking referrals, bridging optimal partners within the co-branding industry.
+- How do we ensure our interests are aligned with yours? The referral framework is built upon a revenue-success model.
+- Do you represent any intellectual properties? No. Independence from IP representation guarantees honest and unbiased insights.
+- How do you access respondents? Research panels enable access to a pre-recruited pool of respondents.
+- Tell me more about your technology? Patented technology recreates purchasing scenarios through images.
+- What is brand licensing? A model in which two entities, a content expert and an industry expert, empower each other to co-create products and experiences that serve market segments.
+- How do you work with panels? An application programming interface lets FLIPO leverage any selected panel while maintaining control over the respondents' journey.
+- Is artificial intelligence involved when surveying? No.
+
+## Contact
+
+- Website: https://flipoteam.com
+- Email: hello@flipoteam.com
+- Phone: +65 9374 8928
+- Address: Paya Lebar Square, Unit 06-28, 60 Paya Lebar Road, Singapore 409051
+- LinkedIn: https://www.linkedin.com/company/flipoteam/

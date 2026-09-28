@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 196 48" role="img" aria-label="FLIPO">
+  <!-- Placeholder logo: two overlapping circles + letter-spaced wordmark. Swap for the official file. -->
+  <circle cx="17" cy="24" r="13" fill="#5B3FE0"/>
+  <circle cx="33" cy="24" r="13" fill="#8E74FF" fill-opacity="0.75"/>
+  <text x="58" y="32" font-family="Manrope, 'Helvetica Neue', Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="5.5" fill="#111111">FLIPO</text>
+</svg>
