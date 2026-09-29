@@ -170,8 +170,8 @@ body {
 }
 
 /* Scroll reveals (see components/ui/Reveal.tsx + RevealObserver.tsx) */
-[data-reveal],
-[data-reveal-group] > [data-reveal-item] {
+:where(html[data-reveal="ready"]) [data-reveal],
+:where(html[data-reveal="ready"]) [data-reveal-group] > [data-reveal-item] {
   opacity: 0;
   transform: translate3d(0, 14px, 0);
   transition:
@@ -221,7 +221,7 @@ body {
 }
 
 /* The highlighted item lands last with a subtle scale-up */
-[data-reveal-group] > [data-reveal-item="emphasis"]:nth-child(n) {
+:where(html[data-reveal="ready"]) [data-reveal-group] > [data-reveal-item="emphasis"]:nth-child(n) {
   transform: translate3d(0, 18px, 0) scale(0.94);
   transition-duration: 0.8s;
   transition-delay: calc(var(--reveal-stagger) * 3 + 0.3s);

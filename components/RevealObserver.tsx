@@ -23,9 +23,30 @@ export function RevealObserver() {
       },
       { rootMargin: "0px 0px -10% 0px" },
     );
+
+    const observeTarget = (el: Element) => {
+      if (el.matches("[data-reveal], [data-reveal-group]")) io.observe(el);
+      el.querySelectorAll<HTMLElement>("[data-reveal], [data-reveal-group]").forEach((target) =>
+        io.observe(target),
+      );
+    };
+
     targets.forEach((el) => io.observe(el));
+
+    const mutations = new MutationObserver((records) => {
+      for (const record of records) {
+        record.addedNodes.forEach((node) => {
+          if (node instanceof Element) observeTarget(node);
+        });
+      }
+    });
+    mutations.observe(document.body, { childList: true, subtree: true });
     root.dataset.reveal = "ready";
-    return () => io.disconnect();
+    return () => {
+      mutations.disconnect();
+      io.disconnect();
+      delete root.dataset.reveal;
+    };
   }, []);
 
   return null;
